@@ -8,6 +8,7 @@ export interface ICourse extends Document {
   subjects: string[];
   description: string[];
   price: number;
+  originalPrice:number;
   taxes: number;
   language: string[];
   startDate: Date;
@@ -19,6 +20,10 @@ export interface ICourse extends Document {
     type: [String],
     default: [],
   },
+  title:string;
+  subtitle:string
+  points:string[];
+  badge:string;
   adminId: mongoose.Types.ObjectId;
   createdAt?: Date;
 }
@@ -31,6 +36,7 @@ const CourseSchema = new Schema<ICourse>({
   subjects: [{ type: String, required: true }],
   description: [{ type: String, required: true }],
   price: { type: Number, required: true },
+  originalPrice: { type: Number, required: true },
   taxes: { type: Number, required: true },
   language: [{ type: String, required: true }],
   startDate: { type: Date, required: true },
@@ -41,11 +47,16 @@ const CourseSchema = new Schema<ICourse>({
     required: true,
   },
   FacultyImgs: [{ type: String }],
+  title:{ type: String, required: true },
+  subtitle:{ type: String, required: true },
+  points:[{ type: String, required: true }],
+  badge:{ type: String, required: true },
   adminId:
         {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Admin",
         },
+    
   createdAt: { type: Date, default: Date.now },
 });
 

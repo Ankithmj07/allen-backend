@@ -5,7 +5,7 @@ import {verifyAdminToken} from '../middleware/admin.middleware'
 const Courserouter = express.Router();
 
 Courserouter.post('/',verifyAdminToken, createCourse);
-Courserouter.get('/', getCourses);
+Courserouter.get('/:exam', getCourses);
 
 
 export default Courserouter;

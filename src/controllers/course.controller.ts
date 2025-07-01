@@ -34,6 +34,7 @@ export const getCourses = async (_: Request, res: Response) => {
   
         if (!course) {
           res.status(404).json({ message: 'Course not found' });
+          return
         }
   
         res.json(course);
@@ -45,6 +46,7 @@ export const getCourses = async (_: Request, res: Response) => {
       res.json(courses);
     } catch (err) {
         res.status(500).json({ message: 'Fetch failed', error: err });
+        return
     }
   };
   

@@ -22,7 +22,7 @@ export const createCourse = async (req: AuthenticatedRequest, res: Response,next
     }
   };
 
-export const getCourses = async (_: Request, res: Response) => {
+export const getCourses = async (_: Request, res: Response): Promise<void> => {
     try {
       const { exam } = _.params;
       const { id } = _.query;
@@ -38,12 +38,14 @@ export const getCourses = async (_: Request, res: Response) => {
         }
   
         res.json(course);
+        return
       }
       const courses = await CourseModel.find({
         exam: { $regex: new RegExp(`^${exam}$`, 'i') },
       });
   
       res.json(courses);
+      return
     } catch (err) {
         res.status(500).json({ message: 'Fetch failed', error: err });
         return

@@ -11,7 +11,7 @@ export interface ICourse extends Document {
   originalPrice:number;
   taxes: number;
   language: string[];
-  startDate: Date;
+  startDate: Date[];
   duration: number;
   aboutCourse: {
     [section: string]: string[];
@@ -39,7 +39,7 @@ const CourseSchema = new Schema<ICourse>({
   originalPrice: { type: Number, required: true },
   taxes: { type: Number, required: true },
   language: [{ type: String, required: true }],
-  startDate: { type: Date, required: true },
+  startDate: [{ type: Date, required: true }],
   duration: {type: Number, required: true},
   aboutCourse: {
     type: Map,

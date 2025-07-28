@@ -79,6 +79,7 @@ export const StudentSignin = async (req: Request, res: Response, next: NextFunct
           email: findStudent.email,
           classLevel: findStudent.classLevel,
           exam: findStudent.exam,
+          phNumber: findStudent.phNumber
         },
       });
     }

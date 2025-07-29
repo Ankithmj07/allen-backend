@@ -14,6 +14,9 @@ export interface IStudent extends Document {
   city: string;
   address1: string;
   address2: string;
+  parentName: string;
+  parentGender: string;
+  parentPhNumber: string;
 
 }
 
@@ -73,6 +76,18 @@ const StudentSchema: Schema = new Schema(
       required: false,
     },
     address2: {
+      type: String,
+      required: false,
+    },
+    parentName: {
+      type: String,
+      required: false,
+    },
+    parentGender: {
+      type: String,
+      required: false,
+    },
+    parentPhNumber: {
       type: String,
       required: false,
     },

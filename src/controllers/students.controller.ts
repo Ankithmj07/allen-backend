@@ -104,14 +104,16 @@ export const getStudents = async (req: Request, res: Response) => {
 
   export const updateStudentProfile = async (req: Request, res: Response,next: NextFunction): Promise<void> => {
     try {
-      const { email, gender, dob, pinCode, state, city, address1, address2 } = req.body;
+      const { email, gender, dob, pinCode, state, city, address1, address2, parentName, parentGender,  parentPhNumber } = req.body;
   
       if (!email) {
         res.status(400).json({ message: "Email is required to update profile" });
         return
       }
   
-      const updateFields: Partial<{ gender: string; dob: Date; pinCode:number; state: string; city: string; address1: string; address2: string; }> = {};
+      const updateFields: Partial<{ gender: string; dob: Date; pinCode:number; state: string; city: string; address1: string; address2: string;
+        parentName: string; parentGender:string; parentPhNumber:string;
+       }> = {};
   
       if (gender !== undefined) updateFields.gender = gender;
       if (dob !== undefined) updateFields.dob = new Date(dob);
@@ -120,7 +122,9 @@ export const getStudents = async (req: Request, res: Response) => {
       if (city !== undefined) updateFields.city = city;
       if (address1 !== undefined) updateFields.address1 = address1;
       if (address2 !== undefined) updateFields.address2 = address2;
-      
+      if (parentName !== undefined) updateFields.parentName = parentName;
+      if (parentGender !== undefined) updateFields.parentGender = parentGender;
+      if (parentPhNumber !== undefined) updateFields.parentPhNumber = parentPhNumber;
   
       const updatedStudent = await StudentModel.findOneAndUpdate(
         { email }, // Filter by email

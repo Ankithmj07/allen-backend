@@ -9,6 +9,11 @@ export interface IStudent extends Document {
   dob:Date;
   classLevel: number; // e.g., 11 or 12
   exam: "JEE Mains" | "JEE Advanced" | "NEET";
+  pinCode:number;
+  state:string;
+  city: string;
+  address1: string;
+  address2: string;
 
 }
 
@@ -50,6 +55,26 @@ const StudentSchema: Schema = new Schema(
       type: String,
       enum: ["JEE Mains","JEE Advanced", "NEET"],
       required: true,
+    },
+    pinCode: {
+      type: Number,
+      required: false,
+    },
+    state: {
+      type: String,
+      required: false,
+    },
+    city: {
+      type: String,
+      required: false,
+    },
+    address1: {
+      type: String,
+      required: false,
+    },
+    address2: {
+      type: String,
+      required: false,
     },
   },
   {

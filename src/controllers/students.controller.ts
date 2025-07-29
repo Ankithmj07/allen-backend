@@ -102,12 +102,13 @@ export const getStudents = async (req: Request, res: Response) => {
     }
   };
 
-  export const updateStudentProfile = async (req: Request, res: Response) => {
+  export const updateStudentProfile = async (req: Request, res: Response,next: NextFunction): Promise<void> => {
     try {
       const { email, gender, dob } = req.body;
   
       if (!email) {
-        return res.status(400).json({ message: "Email is required to update profile" });
+        res.status(400).json({ message: "Email is required to update profile" });
+        return
       }
   
       const updateFields: Partial<{ gender: string; dob: Date }> = {};
@@ -122,7 +123,8 @@ export const getStudents = async (req: Request, res: Response) => {
       );
   
       if (!updatedStudent) {
-        return res.status(404).json({ message: "Student not found" });
+        res.status(404).json({ message: "Student not found" });
+        return
       }
   
       res.status(200).json({

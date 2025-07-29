@@ -5,6 +5,8 @@ export interface IStudent extends Document {
   email: string;
   password: string;
   phNumber: string;
+  gender:string;
+  dob:Date;
   classLevel: number; // e.g., 11 or 12
   exam: "JEE Mains" | "JEE Advanced" | "NEET";
 
@@ -30,6 +32,14 @@ const StudentSchema: Schema = new Schema(
     phNumber: {
       type: String,
       required: true,
+    },
+    gender: {
+      type: String,
+      required: false,
+    },
+    dob: {
+      type: Date,
+      required: false,
     },
     classLevel: {
       type: Number,

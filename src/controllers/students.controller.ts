@@ -101,3 +101,35 @@ export const getStudents = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Fetch failed', error: err });
     }
   };
+
+  export const updateStudentProfile = async (req: Request, res: Response) => {
+    try {
+      const { email, gender, dob } = req.body;
+  
+      if (!email) {
+        return res.status(400).json({ message: "Email is required to update profile" });
+      }
+  
+      const updateFields: Partial<{ gender: string; dob: Date }> = {};
+  
+      if (gender !== undefined) updateFields.gender = gender;
+      if (dob !== undefined) updateFields.dob = new Date(dob);
+  
+      const updatedStudent = await StudentModel.findOneAndUpdate(
+        { email }, // Filter by email
+        { $set: updateFields }, // Only update what's provided
+        { new: true } // Return updated document
+      );
+  
+      if (!updatedStudent) {
+        return res.status(404).json({ message: "Student not found" });
+      }
+  
+      res.status(200).json({
+        message: "Profile updated successfully",
+        student: updatedStudent,
+      });
+    } catch (err) {
+      res.status(500).json({ message: "Update failed", error: err });
+    }
+  };
